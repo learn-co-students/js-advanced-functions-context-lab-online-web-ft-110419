@@ -53,17 +53,22 @@ let hoursWorkedOnDate = function(soughtDate){
 
 let wagesEarnedOnDate = function(soughtDate) {
     let rawWage = hoursWorkedOnDate.call(this, soughtDate) * this.payPerHour
-    return hoursWorkedOnDate.call(this, soughtDate)
-    // return this.payPerHour
-    // let rawWage = hoursWorkedOnDate * this.payPerHour
-    // return hoursWorkedOnDate(this)
-    // return parseFloat(rawWage.toString())
+    return parseFloat(rawWage.toString())
 }
 
 
+let findEmployeeByFirstName = function(srcArray, firstName) {
+    return srcArray.find(function(rec){
+      return rec.firstName === firstName
+    })
+  }
 
-
-
+  function calculatePayroll(array){
+    let total = array.reduce(function(num, employee){
+        return num += allWagesFor.call(employee)
+    }, 0)
+   return total
+}
 
 
 
