@@ -86,7 +86,7 @@ function payrollExpense() {
 
 function calculatePayroll(employees) {
     const wages = employees.reduce( (total, emp) => {
-        return total + allWagesFor(emp)
+        return total + allWagesFor.call(emp)
     }, 0)
-    console.log(wages)
+    return wages
 }
