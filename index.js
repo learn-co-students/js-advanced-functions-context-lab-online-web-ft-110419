@@ -19,13 +19,12 @@ const createEmployeeRecords = function(employees) {
 const createTimeInEvent = (dateStamp) => {
     const [date, hour] = dateStamp.split(' ')
     
-    const timeIn = {
+    this.timeInEvents.push({
         type : 'TimeIn',
         hour : parseInt(hour, 10),
         date : date
-    }
+    })
     
-    this.timeInEvents.push(timeIn)
     return this
 }
 /*
