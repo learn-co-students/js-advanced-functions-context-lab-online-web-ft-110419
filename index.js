@@ -16,7 +16,7 @@ const createEmployeeRecords = function(employees) {
     return records
 }
 
-const createTimeInEvent = (dateStamp) => {
+const createTimeInEvent = function(dateStamp) {
     const [date, hour] = dateStamp.split(' ')
     
     this.timeInEvents.push({
@@ -28,7 +28,7 @@ const createTimeInEvent = (dateStamp) => {
     return this
 }
 
-const createTimeOutEvent = (dateStamp) => {
+const createTimeOutEvent = function(dateStamp) {
     const [date, hour] = dateStamp.split(' ')
     
     this.timeOutEvents.push({
@@ -38,6 +38,19 @@ const createTimeOutEvent = (dateStamp) => {
     })
     
     return this
+}
+
+function hoursWorkedOnDate(date) {
+    const inTime = this.timeInEvents.find( event => event.date === date).hour
+    const outTime = this.timeOutEvents.find( event => event.date === date).hour
+    const hours = (outTime - inTime) / 100
+    return hours
+}
+
+function wagesEarnedOnDate(date) {
+    const hours = hoursWorkedOnDate.call(this, date)
+    const rate = this.payPerHour
+    return hours * rate
 }
 /*
  We're giving you this function. Take a look at it, you might see some usage
@@ -58,4 +71,20 @@ let allWagesFor = function () {
     }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
 
     return payable
+}
+
+function findEmployeeByFirstName(employees, firstName) {
+    const employee = employees.find( emp => emp.firstName === firstName)
+    return employee
+}
+
+function payrollExpense() {
+    const eligibleDates = this.timeOutEvents.map( event => event.date )
+    const wages = eligibleDates.call(allWagesFor(this), 0)
+    console.log(wages)
+}
+
+function calculatePayroll(employees) {
+    const wages = employees.map(allWagesFor)
+    console.log(wages)
 }
