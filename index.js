@@ -20,13 +20,13 @@ function createEmployeeRecord(row){
     }
 }
 
-let createEmployees = function(employeeRowData) {
+function createEmployees(employeeRowData) {
     return employeeRowData.map(function(row){
         return createEmployeeRecord(row)
     })
 }
 
-let createTimeInEvent = function(dateStamp){
+function createTimeInEvent(dateStamp){
     let [date, hour] = dateStamp.split(' ')
 
     this.timeInEvents.push({
@@ -38,8 +38,7 @@ let createTimeInEvent = function(dateStamp){
     return this
 }
 
-
-let createTimeOutEvent = function(dateStamp){
+function createTimeOutEvent(dateStamp){
     let [date, hour] = dateStamp.split(' ')
 
     this.timeOutEvents.push({
@@ -52,7 +51,7 @@ let createTimeOutEvent = function(dateStamp){
 }
 
 
-let hoursWorkedOnDate = function(soughtDate){
+function hoursWorkedOnDate(soughtDate){
     let inEvent = this.timeInEvents.find(function(e) {
        return e.date === soughtDate
     })
@@ -65,7 +64,7 @@ let hoursWorkedOnDate = function(soughtDate){
 }
 
 
-let wagesEarnedOnDate = function(dateSought){
+function wagesEarnedOnDate(dateSought){
     let hours = hoursWorkedOnDate.call(this, dateSought)
    return (hours * this.payPerHour)
 
@@ -73,7 +72,7 @@ let wagesEarnedOnDate = function(dateSought){
  
 
 
-let allWagesFor = function () {
+function allWagesFor() {
     let eligibleDates = this.timeInEvents.map(function (e) {
         return e.date
     })
@@ -86,13 +85,13 @@ let allWagesFor = function () {
 }
 
 
-let calculatePayroll = function(arrays){
+function calculatePayroll(arrays){
     return arrays.reduce(function(memo, rec){
         return memo + allWagesFor.call(rec)
     }, 0)
 }
 
-let createEmployeeRecords = function(arrays){
+function createEmployeeRecords(arrays){
     return arrays.map(function(row){
          return createEmployeeRecord(row)
      })
