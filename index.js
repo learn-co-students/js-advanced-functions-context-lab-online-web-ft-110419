@@ -20,3 +20,61 @@ let allWagesFor = function () {
 
     return payable
 }
+
+function createEmployeeRecord(emp) {
+    return {
+        firstName: emp[0], familyName: emp[1], title: emp[2], payPerHour: emp[3],
+        timeInEvents: [], timeOutEvents: []
+    }
+
+}
+
+
+function createEmployeeRecords(emp) {
+    let newArr = emp.map(ele => createEmployeeRecord(ele))
+    return newArr
+}
+
+function createTimeInEvent(dateStamp) {
+    let [date, hour] = dateStamp.split(' ')
+
+    this.timeInEvents.push({
+        type: "TimeIn",
+        hour: parseInt(hour, 10),
+        date,
+    })
+
+    return this
+}
+function createTimeOutEvent(dateStamp) {
+    let [date, hour] = dateStamp.split(' ')
+
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        hour: parseInt(hour, 10),
+        date,
+    })
+
+    return this
+}
+
+function hoursWorkedOnDate(dateIn) {
+    let timeIn = this.timeInEvents.find(ele => ele.date === dateIn)
+    let timeOut = this.timeOutEvents.find(ele => ele.date === dateIn)
+
+    return (timeOut.hour - timeIn.hour) / 100
+
+}
+
+function wagesEarnedOnDate(checks) {
+    let wage = hoursWorkedOnDate.call(this, checks) * this.payPerHour
+    return parseFloat(wage.toString())
+}
+
+function calculatePayroll(empRecord) {
+    return empRecord.reduce((memo, record) => memo + allWagesFor.call(record), 0)
+}
+
+function findEmployeeByFirstName(srcArray, firstName) {
+    return srcArray.find(ele => ele.firstName === firstName)
+}
